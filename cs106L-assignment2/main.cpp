@@ -40,10 +40,12 @@ using std::unordered_set;   using std::cin;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // BEGIN STUDENT CODE HERE
 int numCommonLinks(const unordered_set<string>& curr_set, const unordered_set<string>& target_set) {
-    // replace all of these lines!
-    (void) target_set;
-    (void) curr_set;
-    return 0; 
+    int cnt = 0;
+    for(string s: curr_set){
+        if(target_set.find(s) != target_set.end())
+            cnt++;
+    }
+    return cnt; 
 }
 // END STUDENT CODE HERE
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,12 +66,10 @@ vector<string> findWikiLadder(const string& start_page, const string& end_page) 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     // BEGIN STUDENT CODE HERE
     auto cmp_fn = [&w, &target_set](const vector<string>& left, const vector<string>& right) {
-        // replace all of these lines.
-        (void) w;
-        (void) target_set;
-        (void) left;
-        (void) right;
-        return false; // replace this line! make sure to use numCommonLinks.
+        unordered_set<string> left_set{}, right_set{};
+        for(string s: left){left_set.insert(s);}
+        for(string s: right){right_set.insert(s);}
+        return numCommonLinks(target_set, left_set) < numCommonLinks(target_set, right_set); 
     };
     // END STUDENT CODE HERE
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,15 +81,10 @@ vector<string> findWikiLadder(const string& start_page, const string& end_page) 
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     // BEGIN STUDENT CODE HERE
-    // something like priority_queue<...> queue(...);
-    // please delete ALL 4 of these lines! they are here just for the code to compile.
-    std::priority_queue<vector<string>> queue;
-    throw std::invalid_argument("Not implemented yet.\n");
-    return {};
-
+    std::priority_queue<vector<string>, vector<vector<string>>, decltype(cmp_fn)> queue(cmp_fn);
     // END STUDENT CODE HERE
     ///////////////////////////////////////////////////////////////////////////////////////////////////
-
+    
     queue.push({start_page});
     unordered_set<string> visited;
 
@@ -143,6 +138,8 @@ int main() {
     cout << "Enter a file name: ";
     string filename;
     getline(cin, filename);
+
+    
 
     ifstream in(filename);
     int numPairs;

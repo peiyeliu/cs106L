@@ -1,7 +1,7 @@
 #ifndef WIKISCRAPER_H
 #define WIKISCRAPER_H
 
-#include <cpr/cpr.h>
+// #include <cpr/cpr.h>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>

@@ -37,3 +37,5 @@
 vcpkg/
 build/
 build_and_run.sh
+
+HashMap_Starter/*.Identifier

@@ -1,4 +1,5 @@
-# exclude folders in github language stats
+# exclude files in github language stats
+# ref: https://github.com/github/linguist/blob/master/docs/overrides.md
 *.html -linguist-detectable
 *.txt -linguist-detectable
 

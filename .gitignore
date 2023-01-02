@@ -31,11 +31,7 @@
 *.out
 *.app
 
-
-
 # CS106L specific files
 vcpkg/
 build/
 build_and_run.sh
-
-HashMap_Starter/*.Identifier

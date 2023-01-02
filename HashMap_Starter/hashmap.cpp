@@ -204,6 +204,9 @@ void HashMap<K, M, H>::debug() const{
 
 
 
+
+
+
 template <typename K, typename M, typename H>
 void HashMap<K, M, H>::rehash(size_t new_bucket_count) {
 if (new_bucket_count == 0) {
@@ -269,9 +272,7 @@ std::ostream& operator<<(std::ostream& os, const HashMap<K, M, H>& rhs) {
 
 // copy constructor
 template <typename K, typename M, typename H>
-HashMap<K, M, H>::HashMap (const HashMap& other)
-    : _size(0), _hash_function(other._hash_function),_buckets_array(other._buckets_array.size())
-{
+HashMap<K, M, H>::HashMap (const HashMap& other){
     for(auto [key, val]: other){insert({key, val});}
 }
 
@@ -286,13 +287,14 @@ HashMap<K, M, H>& HashMap<K, M, H>::operator=(const HashMap& other){
 
 // move constructor
 template <typename K, typename M, typename H>
-HashMap<K, M, H>::HashMap (HashMap&& other)
-    : _size(other._size), _hash_function(other._hash_function),_buckets_array(other._buckets_array.size())
-{
+HashMap<K, M, H>::HashMap (HashMap&& other){
+    _size = std::move(other._size);
+    _hash_function = std::move(other._hash_function);
+    _buckets_array.resize(other.bucket_count());
     for(long unsigned int i = 0; i < _buckets_array.size(); ++i){
         _buckets_array[i] = std::move(other._buckets_array[i]);
     }
-    other._size=0;
+    other._size = 0;
 }
 
 // move assignment constructor

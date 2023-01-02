@@ -1,1 +1,1 @@
-g++ -Wall -Werror -std=c++17 main.cpp -o main
+g++ -w -Werror -std=c++17 main.cpp -o main >& log.txt

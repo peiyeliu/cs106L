@@ -143,7 +143,7 @@ public:
     *
     * Complexity: O(1) (inlined because function is short)
     */
-    inline size_t size() const;
+    inline size_t size() const noexcept;
 
     /*
     * Returns whether the HashMap is empty.
@@ -156,7 +156,7 @@ public:
     *
     * Complexity: O(1) (inlined because function is short)
     */
-    inline bool empty() const;
+    inline bool empty() const noexcept;
 
     /*
     * Returns the load_factor, defined as size/bucket_count.
@@ -172,7 +172,7 @@ public:
     * Notes: our minimal implementation does not automatically rehash when the load
     * factor is too high. If you want as an extension, you can implement automatic rehashing.
     */
-    inline float load_factor() const;
+    inline float load_factor() const noexcept;
 
     /*
     * Returns the number of buckets.
@@ -193,7 +193,7 @@ public:
     * A noexcept function that throws an exception will automatically
     * terminate the program.
     */
-    inline size_t bucket_count() const;
+    inline size_t bucket_count() const noexcept;
 
     /*
     * Returns whether or not the HashMap contains the given key.
@@ -211,7 +211,7 @@ public:
     * Since contains feels more natural to students who've used the Stanford libraries
     * and will be available in the future, we will implement map.contains(key).
     */
-    bool contains(const K& key) const;
+    bool contains(const K& key) const noexcept;
 
     /*
     * Returns a l-value reference to the mapped value given a key.
@@ -232,7 +232,10 @@ public:
     * if a key is not found. Instead, it will create a K/M pair for that key with a default
     * mapped value. This function is also not const-correct, which you will fix in milestone 2.
     */
-    M& at (const K& key) const;
+    M& at (const K& key);
+
+
+    const M& at (const K& key) const;
 
     /*
     * Removes all K/M pairs the HashMap.
@@ -250,7 +253,7 @@ public:
     * ready to be inserted again, as if it were a newly constructed HashMap with no elements.
     * The number of buckets should stay the same.
     */
-    void clear();
+    void clear() noexcept;
 
     /*
      * Finds the element with the given key, and returns an iterator to that element.
@@ -266,6 +269,8 @@ public:
      * Complexity: O(1) amortized average case, O(N) worst case, N = number of elements
      */
     iterator find(const K& key);
+
+    const_iterator find(const K& key) const;
 
     /*
     * Inserts the K/M pair into the HashMap, if the key does not already exist.
@@ -356,7 +361,7 @@ public:
      * Usage:
      *      auto iter = map.begin();
      */
-    iterator begin();
+    iterator begin() noexcept;
 
     /*
      * Returns a const_iterator to the first element.
@@ -365,7 +370,7 @@ public:
      * Usage:
      *      auto iter = cmap.begin();
      */    
-    const_iterator begin() const;
+    const_iterator begin() const noexcept;
 
     /*
      * Returns an iterator to one past the last element.
@@ -374,7 +379,11 @@ public:
      * Usage:
      *      while (iter != map.end()) {...}
      */
-    iterator end();
+    iterator end() noexcept;
+
+    const_iterator end() const noexcept;
+
+
 
 
     /*
@@ -397,7 +406,7 @@ public:
     * Tip: place map.debug() in various places in the test cases to figure out which operation
     * is failing. Super useful when we debugged our code.
     */
-    void debug();
+    void debug() const;
 
     /* EXTRA CONSTURCTORS */
 
@@ -456,11 +465,8 @@ public:
     // TODO: declare headers for copy constructor/assignment, move constructor/assignment
 
     HashMap (const HashMap& rhs); // copy constructor
-
     HashMap& operator=(const HashMap& rhs); // copy assignment constructor
-    
     HashMap (HashMap&& rhs); // move constructor
-
     HashMap& operator = (HashMap&& rhs); // move assignment constructor
 
 

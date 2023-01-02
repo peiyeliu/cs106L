@@ -11,6 +11,7 @@
 #include <sstream>              // for istringstream
 #include "hashmap_iterator.h"
 #include <vector>
+#include <algorithm>            // for find_if
 
 // add any other includes that are necessary
 

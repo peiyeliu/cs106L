@@ -1,0 +1,5 @@
+# exclude folders in github language stats
+cs106L-assignment1/res -linguist-detectable
+cs106L-assignment2/res -linguist-detectable
+cs106L-assignment2/test-resources -linguist-detectable
+

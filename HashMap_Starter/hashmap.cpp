@@ -269,18 +269,9 @@ std::ostream& operator<<(std::ostream& os, const HashMap<K, M, H>& rhs) {
 
 // copy constructor
 template <typename K, typename M, typename H>
-<<<<<<< HEAD
 HashMap<K, M, H>::HashMap (const HashMap& other)
     : _size(0), _hash_function(other._hash_function),_buckets_array(other._buckets_array.size())
 {
-=======
-HashMap<K, M, H>::HashMap (const HashMap& other){
-    clear();
-    _size = 0;
-    _hash_function = other._hash_function;
-    _buckets_array.resize(other._buckets_array.size());
-    //std::cout << " ****copy constructor size = " << _buckets_array.size() << std::endl;
->>>>>>> 2aade360b7eb326620e7cc9ee936a6c492dcbad1
     for(auto [key, val]: other){insert({key, val});}
 }
 
@@ -295,23 +286,13 @@ HashMap<K, M, H>& HashMap<K, M, H>::operator=(const HashMap& other){
 
 // move constructor
 template <typename K, typename M, typename H>
-<<<<<<< HEAD
 HashMap<K, M, H>::HashMap (HashMap&& other)
     : _size(other._size), _hash_function(other._hash_function),_buckets_array(other._buckets_array.size())
 {
-=======
-HashMap<K, M, H>::HashMap (HashMap&& other){
-    _size = std::move(other._size);
-    _hash_function = std::move(other._hash_function);
-    _buckets_array.resize(other._buckets_array.size());
->>>>>>> 2aade360b7eb326620e7cc9ee936a6c492dcbad1
     for(long unsigned int i = 0; i < _buckets_array.size(); ++i){
         _buckets_array[i] = std::move(other._buckets_array[i]);
     }
-<<<<<<< HEAD
     other._size=0;
-=======
->>>>>>> 2aade360b7eb326620e7cc9ee936a6c492dcbad1
 }
 
 // move assignment constructor
